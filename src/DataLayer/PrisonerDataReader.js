@@ -44,9 +44,9 @@ module.exports = class PrisonerDataReader {
     }
 
     // WARNING: THIS WILL OVERRIDE ANY DATA CURRENTLY IN THE "Students.json" FILE
-    generateRandomPrisoner(id) {
-        this.writeArrayToFile(Student.generateRandomPrisoners(200, id));
-    }
+    // generateRandomPrisoner(id) {
+    //     this.writeArrayToFile(Prisoner.generateRandomPrisoners(200, id));
+    // } // Not finished
 
     
 }
