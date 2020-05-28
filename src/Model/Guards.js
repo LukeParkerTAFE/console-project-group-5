@@ -3,7 +3,6 @@ const { writeFileSync, readFileSync } = require("fs");
 const path = require("path");
 const GUARDS_FILE_PATH = (path.join(__dirname, "../../JSONDATA/Guards.json"));
 console.log(GUARDS_FILE_PATH)
-
 const { getRandomGivenName, getRandomLastName, getRandomNumber } = require("../Common/Random");
 
 class Guard {
