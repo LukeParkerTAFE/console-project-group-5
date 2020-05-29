@@ -1,20 +1,25 @@
+const path = require("path");
 const { askQuestion } = require("../Common/CommonFunctions");
-// const { PrisonerService } = require("../Services/PrisonerService");
 const lookUpPrisonerMenu = require("./LookUpPrisonerMenu");
-const mainMenu = require("./MainMenu");
+const { PrisonerService, GuardService } = require("../Services")
+const { PrisonerDataReader, GuardDataReader } = require("../DataLayer")
+const _prisonerDataReader = new PrisonerDataReader(path.join(__dirname, "../../JSONData/Prisoners.json"))
+const _guardDataReader = new GuardDataReader(path.join(__dirname, "../../JSONData/Guards.json"))
+const _prisonerService = new PrisonerService(_prisonerDataReader, _guardDataReader)
+const _guardService = new GuardService(_guardDataReader, _prisonerDataReader)
 
 module.exports = async function prisonerMenu() {
     let shouldLoop = true;
     while (shouldLoop) {
         console.log("[1] Look Up a Prisoner");
         console.log("[2] Add New Prisoner");
-        console.log("[3] Go Back")
-        console.log("[4] Exit");
+        console.log("[3] Go Back");
+        console.log("[4] Exit")
         let answer = await askQuestion("Please select an option from above: ");
         console.log();
         switch (answer) {
             case "1":
-                await lookUpPrisonerMenu()
+                shouldLoop = await lookUpPrisonerMenu()
                 break;
             case "2":
                 //add new prisoner code
@@ -31,7 +36,7 @@ module.exports = async function prisonerMenu() {
                     parsedCrimes,
                     guardId,
                 );
-                PrisonerService.addPrisoner(prisoner);
+                _prisonerService.addPrisoner(newPrisoner);
                 console.log("");
                 console.table(prisoner)
                 console.log("New Prisoner has been added")
@@ -39,16 +44,17 @@ module.exports = async function prisonerMenu() {
                 break;
             case "3":
                 //go back
-                await mainMenu()
+                shouldLoop = false;
                 break;
             case "4":
-                //exit
-                shouldLoop = false;
-                default:
-                    //wrong selection
-                    console.log("Please enter a valid option");
-                    console.log();
-                    break;
+                //hard exit
+                return false;
+            default:
+                //wrong selection
+                console.log("Please enter a valid option");
+                console.log();
+                break;
         }
     }
+    return true;
 }

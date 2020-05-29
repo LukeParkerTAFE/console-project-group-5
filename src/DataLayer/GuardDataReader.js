@@ -1,5 +1,5 @@
 const { writeFileSync, readFileSync } = require("fs");
-const  Guards  = require("../Model/Guards");
+const  Guard  = require("../Model/Guards");
 
 module.exports = class GuardDataReader {
     constructor(fileName) {

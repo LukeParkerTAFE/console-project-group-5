@@ -9,10 +9,9 @@ module.exports = class PrisonerDataReader {
     getArrayFromFile() {
         return JSON.parse(readFileSync(this.fileName).toString()).map(prisonerRaw => new Prisoner(
             prisonerRaw.firstName,
-            prisonerRaw.lasName,
+            prisonerRaw.lastName,
             prisonerRaw.age,
             prisonerRaw.crimes,
-            prisonerRaw.prisonWing,
             prisonerRaw.id,
         ));
     }
@@ -22,7 +21,7 @@ module.exports = class PrisonerDataReader {
     }
 
     getPrisoner(id) {
-        return this.getArrayFromFile().find(p => p.id = id);
+        return this.getArrayFromFile().find(p => p.id == id);
     }
 
     updatePrisoner(prisoner) {
@@ -44,9 +43,9 @@ module.exports = class PrisonerDataReader {
     }
 
     // WARNING: THIS WILL OVERRIDE ANY DATA CURRENTLY IN THE "Students.json" FILE
-    generateRandomPrisoner(id) {
-        this.writeArrayToFile(Student.generateRandomPrisoners(200, id));
-    }
+    // generateRandomPrisoner(id) {
+    //     this.writeArrayToFile(Student.generateRandomPrisoners(200, id));
+    // }
 
     
 }
