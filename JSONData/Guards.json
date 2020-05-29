@@ -161,5 +161,18 @@
         "age": 67,
         "id": "74b301b3-e428-426f-9377-a2a7b090cf0a"
     },
-    null
+    [
+        {
+            "firstName": "Jim Bob",
+            "lastName": "Swindells",
+            "age": 87,
+            "id": "7f2fc203-414f-4c21-8d7f-b966189d6f5c"
+        },
+        {
+            "firstName": "Homer",
+            "lastName": "Bonefat",
+            "age": 44,
+            "id": "f33a9c25-b4df-491a-99ba-e1bf9985a651"
+        }
+    ]
 ]

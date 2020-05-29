@@ -44,6 +44,6 @@ module.exports = class GuardDataReader {
     }
 
      getRandomGuard(numberOfGuards){
-        Guard.getRandomGuard(numberOfGuards)
+       return Guard.getRandomGuard(numberOfGuards)
     }
 }
