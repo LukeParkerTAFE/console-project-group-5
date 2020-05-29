@@ -40,6 +40,7 @@ module.exports = class GuardService {
 
     hireNewGuard(numberOfGuards) {
         let guards = this.guardDataReader.getRandomGuard(numberOfGuards)
+        console.log(guards)
         this.guardDataReader.hireNewGuard(guards)
     }
 
