@@ -8,6 +8,7 @@ module.exports = async function mainMenu() {
     let shouldLoop = true;
     while (shouldLoop) {
         console.log("MAIN MENU");
+        console.log();
         console.log("[1] Prisoner Menu");
         console.log("[2] Guard Menu");
         console.log("[3] Exit");

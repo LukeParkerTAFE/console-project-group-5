@@ -1,5 +1,7 @@
 const { writeFileSync, readFileSync } = require("fs");
 const  Guard  = require("../Model/Guards");
+const { getRandomGivenName, getRandomLastName, getRandomNumber } = require("../Common/Random");
+
 
 module.exports = class GuardDataReader {
     constructor(fileName) {
@@ -15,15 +17,15 @@ module.exports = class GuardDataReader {
         ));
     }
 
-    writeArrayToFile() {
+    writeArrayToFile(arrayValue) {
         writeFileSync(this.fileName, JSON.stringify(arrayValue));
     }
 
     getGuard(id) {
-        return this.getArrayFromFile().find(g => g.id = id);
+        return this.getArrayFromFile().find(g => g.id == id);
     }
 
-    updatePrisoner(guard) {
+    updateGuard(guard) {
         this.writeArrayToFile(this.getArrayFromFile().map(g => {
             if (g.id == guard.id) {
                 return guard;
@@ -37,14 +39,11 @@ module.exports = class GuardDataReader {
         this.writeArrayToFile(this.getArrayFromFile().filter(g => g.id != id));
     }
 
-    addGuard(guard) {
-        this.writeArrayToFile(this.getArrayFromFile().concat([guard]));
+    hireNewGuard(guards) {
+        this.writeArrayToFile(this.getArrayFromFile().concat([guards]));
     }
 
-    // WARNING: THIS WILL OVERRIDE ANY DATA CURRENTLY IN THE "Students.json" FILE
-    // generateRandomGuard(id) {
-    //     this.writeArrayToFile(Guard.generateRandomGuard(200, id));
-    // } // Not finished
-
-
+     getRandomGuard(numberOfGuards){
+        Guard.getRandomGuard(numberOfGuards)
+    }
 }

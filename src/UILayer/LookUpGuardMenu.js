@@ -1,17 +1,23 @@
 const path = require("path")
 const { askQuestion } = require("../Common/CommonFunctions");
+const Guard = require("../Model/Guards")
 const { PrisonerService, GuardService } = require("../Services")
 const { PrisonerDataReader, GuardDataReader } = require("../DataLayer")
 const _prisonerDataReader = new PrisonerDataReader(path.join(__dirname, "../../JSONData/Prisoners.json"))
 const _guardDataReader = new GuardDataReader(path.join(__dirname, "../../JSONData/Guards.json"))
 const _prisonerService = new PrisonerService(_prisonerDataReader, _guardDataReader)
 const _guardService = new GuardService(_guardDataReader, _prisonerDataReader)
+const { getRandomGivenName, getRandomLastName, getRandomNumber } = require("../Common/Random");
+
 module.exports = async function lookUpGuardMenu() {
     let shouldLoop = true;
     while (shouldLoop) {
+        console.log();
+        console.log("GUARD LOOKUP")
+        console.log();
         console.log("[1] Search by Name if unsure of Guard ID");
         console.log("[2] Enter Guard ID");
-        console.log("[3] Return to Guard Menu");
+        console.log("[3] Go Back");
         let answer = await askQuestion("Please select an option from above: ");
         console.log();
         switch (answer) {
@@ -25,21 +31,18 @@ module.exports = async function lookUpGuardMenu() {
                 //use ID
                 let guardId = await askQuestion("Please enter Guard ID: ");
                 let guard = _guardService.getGuard(guardId);
+                if (guard === undefined) {
+                    shouldLoop = false;
+                    break;
+                }
                 console.log("you have selected the following Guard")
-                console.table(guard, ["firstName", "lastName", "age"]);
-                console.log("[1] List Assigned Prisoners");
-                console.log("[2] Update Guard Information");
-                console.log("[3] Dismiss Guard");
-                console.log("[4] Return to Look Up Menu");
+                console.table(guard);
+                console.log("[1] Update Guard Information");
+                console.log("[2] Dismiss Guard");
+                console.log("[3] Return to Look Up Menu");
                 let option = await askQuestion("Please select an option from above: ");
                 switch (option) {
-                    case "2":
-                        //check assigned prisoners
-                        let prisoners = _guardService.getPrisoners(guardId);
-                        console.log(`${guard.firstName} ${guard.lastName} is in charge of the following prisoners: `)
-                        console.table(prisoners["firstName", "lastName", "id"])
-                        break;
-                    case "3":
+                    case "1":
                         //update information
                         console.log(guard);
                         console.log("");
@@ -52,7 +55,7 @@ module.exports = async function lookUpGuardMenu() {
                             updatedGuardFirstName,
                             updatedGuardLastName,
                             parsedUpdatedGuardAge,
-                            GuardId
+                            guard.id
                         );
                         _guardService.updateGuard(updatedGuard);
                         console.log("");
@@ -60,14 +63,14 @@ module.exports = async function lookUpGuardMenu() {
                         console.log("this is the updated Guard Information");
                         console.log("");
                         break;
-                    case "4":
+                    case "2":
                         //delete guard
-                        console.table(guard, ["firstName", "lastName", "age"]);
-                        _guardService.deleteGuard(guard);
-                        console.log("This Guard has now been fired. Final paycheck will be posted next week");
+                        console.table(guard);
+                        _guardService.deleteGuard(guardId);
+                        console.log("This Guard has now been fired. Final paycheck will be posted next week.");
                         console.log("");
                         break;
-                    case "5":
+                    case "3":
                         //return
                         shouldLoop = false;
                         break;
