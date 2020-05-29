@@ -11,9 +11,12 @@ const _guardService = new GuardService(_guardDataReader, _prisonerDataReader)
 module.exports = async function guardMenu() {
     let shouldLoop = true;
     while (shouldLoop) {
+        console.log();
+        console.log("GUARD MENU");
+        console.log();
         console.log("[1] Look Up a Guard");
         console.log("[2] Hire New Guard(s)");
-        console.log("[3] Return to Main Menu")
+        console.log("[3] Go Back");
         let answer = await askQuestion("Please select an option from above: ");
         console.log();
         switch (answer) {
@@ -39,4 +42,5 @@ module.exports = async function guardMenu() {
                 break;
         }
     }
+    return true;
 }

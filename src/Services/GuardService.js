@@ -1,3 +1,5 @@
+
+
 module.exports = class GuardService {
     constructor(guardDataReader, prisonerDataReader) {
         this.guardDataReader = guardDataReader;
@@ -6,6 +8,15 @@ module.exports = class GuardService {
 
     getGuard(id) {
         return this.guardDataReader.getGuard(id);
+    }
+    getGuardCheck(id) {
+        let guard = this.getGuard(id);
+        if (!guard) {
+            console.log("Error: No Matching Guard Found");
+        } else {
+            return this.guardDataReader.getGuard(id);
+        
+        }
     }
 
     deleteGuard(id) {
@@ -19,24 +30,18 @@ module.exports = class GuardService {
 
     updateGuard(guard) {
         let dataGuard = this.getGuard(guard.id);
-        if (!dataGuard) {
-            console.log("Error: No Matching Guard Found");
-        } else if (this.validateGuard(guard)) {
-            this.guardDataReader.updateGuard(guard);
-        } else {
-            console.log("Error: Guard object was invalid");
-        }
+        // if (!dataGuard) {
+        //     console.log("Error: No Matching Guard Found");
+        // } else if (this.validateGuard(guard)) {
+        //     this.guardDataReader.updateGuard(guard);
+        // } else {
+        //     console.log("Error: Guard object was invalid");
+        // }
     }
 
-    addGuard(guard) {
-        let dataGuard = this.getGuard(guard.id);
-        if (dataGuard) {
-            console.log("Error: Guard Already Found With id: " + guard.id);
-        } else if (this.validateGuard(guard)) {
-            this.guardDataReader.addGuard(guard);
-        } else {
-            console.log("Error: Guard object was invalid");
-        }
+    hireNewGuard(numberOfGuards) {
+        let guards = this.GuardDataReader.getRandomGuard(numberOfGuards)
+        this.GuardDataReader.hireNewGuard(guards)
     }
 
     searchByName(searchTerm) {
@@ -53,7 +58,7 @@ module.exports = class GuardService {
     }
 
     doesGuardExist(id) {
-        let prisoner = this.prisonerDataReader.getPrisoner(id);
+        let guard = this.prisonerDataReader.getPrisoner(id);
         if (guard) {
             return true;
         } else {
@@ -61,14 +66,14 @@ module.exports = class GuardService {
         }
     }
 
-    validatePrisoner(guard) {
-        if (!this.doesGuardExist(guard.prisonerId)) {
-            console.log("Error: Could not find matching Guard for given guardId")
-            return false;
-        }
-        if (isNaN(guard.age)) {
-            return false;
-        }
-        return true;
-    }
+    // validateGuard(guard) {
+    //     if (!this.doesGuardExist(guard.prisonerId)) {
+    //         console.log("Error: Could not find matching Guard for given guardId")
+    //         return false;
+    //     }
+    //     if (isNaN(guard.age)) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 }

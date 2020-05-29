@@ -5,7 +5,7 @@ const PRISONERS_FILE_PATH = (path.join(__dirname, "../../JSONData/Prisoners.json
 const { getRandomGivenName, getRandomLastName, getRandomCrimes, getRandomNumber } = require("../Common/Random");
 
 class Prisoner {
-    constructor(firstName, lastName, age, crimes, prisonWing, id = uuid.v4()) {
+    constructor(firstName, lastName, age, crimes, id = uuid.v4()) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

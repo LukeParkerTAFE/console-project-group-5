@@ -7,7 +7,15 @@ module.exports = class PrisonerService {
     getPrisoner(id) {
         return this.prisonerDataReader.getPrisoner(id);
     }
-
+    getPrisonerCheck(id) {
+        let prisoner = this.getPrisoner(id);
+        if (!prisoner) {
+            console.log("Error: No Matching Prisoner Found");
+        } else {
+            return this.prisonerDataReader.getPrisoner(id);
+        
+        }
+    }
     deletePrisoner(id) {
         let prisoner = this.getPrisoner(id);
         if (!prisoner) {
@@ -62,10 +70,10 @@ module.exports = class PrisonerService {
     }
 
     validatePrisoner(prisoner) {
-        if (!this.doesGuardExist(prisoner.guardId)) {
-            console.log("Error: Could not find matching Guard for given guardId")
-            return false;
-        }
+        // if (!this.doesGuardExist(prisoner.guardId)) {
+        //     console.log("Error: Could not find matching Guard for given guardId")
+        //     return false;
+        // }
         if (isNaN(prisoner.age)) {
             return false;
         }

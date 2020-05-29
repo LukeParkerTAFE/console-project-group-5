@@ -15,12 +15,12 @@ module.exports = class GuardDataReader {
         ));
     }
 
-    writeArrayToFile() {
+    writeArrayToFile(arrayValue) {
         writeFileSync(this.fileName, JSON.stringify(arrayValue));
     }
 
     getGuard(id) {
-        return this.getArrayFromFile().find(g => g.id = id);
+        return this.getArrayFromFile().find(g => g.id == id);
     }
 
     updatePrisoner(guard) {
@@ -37,14 +37,11 @@ module.exports = class GuardDataReader {
         this.writeArrayToFile(this.getArrayFromFile().filter(g => g.id != id));
     }
 
-    addGuard(guard) {
-        this.writeArrayToFile(this.getArrayFromFile().concat([guard]));
+    hireNewGuard(guards) {
+        this.writeArrayToFile(this.getArrayFromFile().concat([guards]));
     }
 
-    // WARNING: THIS WILL OVERRIDE ANY DATA CURRENTLY IN THE "Students.json" FILE
-    // generateRandomGuard(id) {
-    //     this.writeArrayToFile(Guard.generateRandomGuard(200, id));
-    // } // Not finished
-
-
+    static getRandomGuard(numberOfGuards){
+        Guard.getRandomGuard(numberOfGuards)
+    }
 }
