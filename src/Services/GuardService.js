@@ -1,5 +1,3 @@
-
-
 module.exports = class GuardService {
     constructor(guardDataReader, prisonerDataReader) {
         this.guardDataReader = guardDataReader;
@@ -15,7 +13,7 @@ module.exports = class GuardService {
             console.log("Error: No Matching Guard Found");
         } else {
             return this.guardDataReader.getGuard(id);
-        
+
         }
     }
 
@@ -30,18 +28,19 @@ module.exports = class GuardService {
 
     updateGuard(guard) {
         let dataGuard = this.getGuard(guard.id);
+        this.guardDataReader.updateGuard(guard);
+
         // if (!dataGuard) {
         //     console.log("Error: No Matching Guard Found");
         // } else if (this.validateGuard(guard)) {
-        //     this.guardDataReader.updateGuard(guard);
         // } else {
         //     console.log("Error: Guard object was invalid");
         // }
     }
 
     hireNewGuard(numberOfGuards) {
-        let guards = this.GuardDataReader.getRandomGuard(numberOfGuards)
-        this.GuardDataReader.hireNewGuard(guards)
+        let guards = this.guardDataReader.getRandomGuard(numberOfGuards)
+        this.guardDataReader.hireNewGuard(guards)
     }
 
     searchByName(searchTerm) {

@@ -7,6 +7,8 @@ const _prisonerDataReader = new PrisonerDataReader(path.join(__dirname, "../../J
 const _guardDataReader = new GuardDataReader(path.join(__dirname, "../../JSONData/Guards.json"))
 const _prisonerService = new PrisonerService(_prisonerDataReader, _guardDataReader)
 const _guardService = new GuardService(_guardDataReader, _prisonerDataReader)
+const { getRandomGivenName, getRandomLastName, getRandomNumber } = require("../Common/Random");
+
 module.exports = async function lookUpGuardMenu() {
     let shouldLoop = true;
     while (shouldLoop) {

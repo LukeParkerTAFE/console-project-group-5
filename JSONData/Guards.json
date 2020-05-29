@@ -12,9 +12,9 @@
         "id": "de469879-73ea-4718-9fc0-19d087a7db61"
     },
     {
-        "firstName": "Rebel",
-        "lastName": "Pigfat",
-        "age": 45,
+        "firstName": "Damon",
+        "lastName": "McMahon",
+        "age": 28,
         "id": "e981d3f5-6083-475d-b8c1-c16e9d7a115b"
     },
     {
@@ -160,5 +160,6 @@
         "lastName": "Bracegirdle",
         "age": 67,
         "id": "74b301b3-e428-426f-9377-a2a7b090cf0a"
-    }
+    },
+    null
 ]
