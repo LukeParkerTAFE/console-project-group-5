@@ -10,7 +10,6 @@ class Prisoner {
         this.lastName = lastName;
         this.age = age;
         this.crimes = crimes;
-        this.prisonWing = prisonWing;
         this.id = id
     }
 
@@ -23,7 +22,6 @@ class Prisoner {
                 getRandomLastName(),
                 getRandomNumber(90) + 18,
                 this.generateRandomCrimes(),
-                getRandomNumber(5)+1
             );
             randomPrisoners.push(randomPrisoner);
         }
@@ -40,10 +38,9 @@ class Prisoner {
     
         return filteredCrimes;
     }
-    
 }
 
-let prisoners = Prisoner.generateRandomPrisoners(200)
+// let prisoners = Prisoner.generateRandomPrisoners(200)
+// fs.writeFileSync(PRISONERS_FILE_PATH, JSON.stringify(prisoners))
 
-
-fs.writeFileSync(PRISONERS_FILE_PATH, JSON.stringify(prisoners))
+module.exports = Prisoner;

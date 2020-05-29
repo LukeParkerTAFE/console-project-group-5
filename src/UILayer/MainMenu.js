@@ -3,6 +3,7 @@ const prisonerMenu = require("./PrisonerMenu");
 const guardMenu = require("./GuardMenu");
 
 module.exports = async function mainMenu() {
+    console.log();
     console.log("Welcome to Wentworth Prison Services.")
     let shouldLoop = true;
     while (shouldLoop) {
@@ -15,11 +16,11 @@ module.exports = async function mainMenu() {
         switch (answer) {
             case "1":
                 //prisoner
-                await prisonerMenu()
+                shouldLoop = await prisonerMenu()
                 break;
             case "2":
                 //guard
-                await guardMenu()
+                shouldLoop = await guardMenu()
                 break;
             case "3":
                 //exit

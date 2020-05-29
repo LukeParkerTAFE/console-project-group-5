@@ -28,6 +28,7 @@ class Guard {
     }
 }
 
-let guards = Guard.getRandomGuard(30)
+// let guards = Guard.getRandomGuard(30)
+// writeFileSync(GUARDS_FILE_PATH, JSON.stringify(guards));
 
-writeFileSync(GUARDS_FILE_PATH, JSON.stringify(guards));
+module.exports = Guard
